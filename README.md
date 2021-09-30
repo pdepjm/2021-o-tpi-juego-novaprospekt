@@ -1,10 +1,13 @@
-# Nombre del juego (<- borrar y completar)
+# Plumber
 
 ## Equipo de desarrollo
 
-- Alguien
-- Persona
-- etc.
+- CHOQUE HUANCA, HEBER ISMAEL
+- CHUMA, NICANOR IGNACIO
+- LAFALCE, TOMÁS GABRIEL
+- LOUSTAU, REGINA
+- MOMBELLI, MARTÍN SEBASTIAN
+- VAZQUEZ BERROSTEGUIETA, PEDRO
 
 ## Capturas
 

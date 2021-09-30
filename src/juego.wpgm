@@ -1,10 +1,23 @@
 import wollok.game.*
-import pepita.*
 import texto.*
+import nivel1.*
 
 program juego {
-	game.title("Juego Base")
-	game.addVisual(pepita)
-	game.addVisual(texto)
+	game.title("Plumber")
+	
+	//Configuro el tamaño de los sprites (Aca son de 128x128)
+	game.cellSize(128)
+	
+	//Tamaño del tablero de juego
+	game.height(5)
+	game.width(5)
+	
+	
+	
+	//Inicializa el nivel de pruebas (Nivel 1)
+	nivel1.configuracionInicial()
+	
+	//Inicia el juego
 	game.start()
+	
 }

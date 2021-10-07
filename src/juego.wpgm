@@ -3,18 +3,19 @@ import texto.*
 import nivel1.*
 
 program juego {
+	//Titulo del juego
 	game.title("Plumber")
 	
-	//Configuro el tamaño de los sprites (Aca son de 128x128)
-	game.cellSize(128)
+	//Configuro el tamaño de los sprites (Aca son de 32x32)
+	game.cellSize(32)
 	
-	//Tamaño del tablero de juego
-	game.height(5)
-	game.width(5)
+	//Tamaño del tablero de juego  
+	game.height(10)
+	game.width(10)
 	
 	
 	
-	//Inicializa el nivel de pruebas (Nivel 1)
+	//Inicializa el Nivel 1
 	nivel1.configuracionInicial()
 	
 	//Inicia el juego

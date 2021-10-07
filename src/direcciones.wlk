@@ -1,5 +1,7 @@
+import wollok.game.*
+
 object izquierda {
-	method proximaPosicion(posicionActual) = posicionActual.left(1) 
+	method proximaPosicion(posicionActual) = posicionActual.left(1)
 }
 
 object derecha {

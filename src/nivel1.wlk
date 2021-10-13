@@ -3,8 +3,11 @@ import tuberiaRecta.*
 import tuberiaCurva.*
 import cursor.*
 import direcciones.*
+import valvula.*
 
 object nivel1 {
+	const segundosEnLlenar = 2
+	
 	method configuracionInicial(){
 		//Agrego unas tuberias de prueba
 		const tuberia1 = new TuberiaRecta(posicion = game.at(0,5),orientacion = "Horizontal")
@@ -23,11 +26,14 @@ object nivel1 {
 		game.addVisual(tuberia7)
 		const tuberia8 = new TuberiaCurva(posicion = game.at(5,7),orientacion = "AbajoDerecha")
 		game.addVisual(tuberia8)
+		
+		//const valvula = new Valvula(posicion = game.at(6,8))
+		//game.addVisual(valvula)
+		
 		//Agrego el cursor de juego
 		game.addVisual(cursor)
 		self.configurarTeclas()
 		self.empezarNivel(tuberia1)
-		
 		
 		
 	}
@@ -49,5 +55,7 @@ object nivel1 {
 	method empezarNivel(primeraTuberia){
 		primeraTuberia.pasarAgua()
 	}
+	
+	method tiempoLlenado() = return segundosEnLlenar * 1000
 	
 }

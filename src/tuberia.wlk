@@ -1,3 +1,6 @@
+import wollok.game.*
+import nivel1.*
+
 class Tuberia {
 	// Defino las variables que van a tener todas las tuberias
 	var orientacion
@@ -17,7 +20,16 @@ class Tuberia {
 		return tieneAgua
 	}
 	
+	// Llena la tuberia de agua y luego de cierto tiempo le pasa el agua a la tuberia adyacente, cambia segun el tipo de tuberia
+	method pasarAgua() {
+		tieneAgua = true
+		return game.schedule(nivel1.tiempoLlenado(), { self.llenarProximaTuberia() })
+	}
+	
+	/*
 	method llenar(){
 		tieneAgua = true
-	}
+	}*/
+	
+	method llenarProximaTuberia()
 }

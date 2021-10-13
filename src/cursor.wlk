@@ -7,9 +7,7 @@ object cursor {
 
 	method image() = "cursor.png"
 	
-	method position() {
-		return posicion
-	} 
+	method position() = posicion
 	
 	method posicion(unaPosicion) {
 		posicion = unaPosicion
@@ -22,7 +20,11 @@ object cursor {
 	
 	//Este metodo activa el metodo de rotar de la tuberia que se encuentre debajo del cursor
 	method rotar() {
-		game.colliders(self).first().rotar()
+		const tuberia = game.colliders(self)
+		
+		// Si existe una tuberia en la posicion del cursor, lo rota
+		if (not tuberia.isEmpty()) {
+			tuberia.first().rotar()
+		}
 	}
-	
 }

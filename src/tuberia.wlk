@@ -1,35 +1,100 @@
 import wollok.game.*
 import nivel1.*
+import orientaciones.*
+import direcciones.*
+
+
+// Mensajes principales:
+// Tuberia.rotar()
+// Tuberia.recibirAgua()
 
 class Tuberia {
-	// Defino las variables que van a tener todas las tuberias
-	var orientacion
-	var tieneAgua = false
 	const posicion
+	var puntoCardinal
+	var tieneAgua = false
 	
-	//La imagen cambia segun la orientacion y si tiene agua o no
 	method image(){
-		return "tuberia" + orientacion + tieneAgua.toString() + ".png"
+		return "tuberia" + self.tipoTuberia() + puntoCardinal.nombre() + "_" + tieneAgua.toString() + ".png"
 	}
 	
-	method position() {
-		return posicion
+	method position() = posicion
+	
+	method rotar() {
+		if (not tieneAgua) {
+			self.siguientePuntoCardinal()
+		}
 	}
 	
-	method tieneAgua(){
-		return tieneAgua
+	// Con este metodo empieza todo el trabajo
+	method recibirAgua() {
+		tieneAgua = true
+		game.schedule(nivel1.tiempoLlenado(), { self.pasarAgua() })
 	}
 	
-	// Llena la tuberia de agua y luego de cierto tiempo le pasa el agua a la tuberia adyacente, cambia segun el tipo de tuberia
+	// Para que una tuberia pueda pasar agua sin problemas se tiene que cumplir que:
+	// - Para todos los puertos de una tuberia, debe existir una tuberia adyacente
+	// - Para todas las tuberias adyacentes en cada puerto, todas deben estar alineadas al puerto para recibir el agua
+	// - Por lo menos una tuberia alineada a un puerto pueda recibir el agua sin problemas:
+	// 		Aqui asumimos que los puertos restantes que no pueden recibir agua son porque tienen agua,
+	//		y muy probablemente estas tuberias son las que llenaron la tuberia original en algun momento
+	//
+	// En caso de no cumplir con las tres condiciones, el juego termina
 	method pasarAgua() {
-		tieneAgua = true
-		return game.schedule(nivel1.tiempoLlenado(), { self.llenarProximaTuberia() })
+		// Intentar pasar agua a otras tuberias
+		try {
+			const tuberias = self.tuberiasDisponibles()
+			
+			// Si no hay ninguna tuberia disponible, fin del juego
+			if (tuberias.isEmpty()) {
+				game.say(self, "GAMEOVER") // ROMPER TODO, FIN DEL JUEGO
+			} else {
+				// En otro caso, las tuberias disponibles deben recibir el agua
+				tuberias.forEach({ tuberia => tuberia.recibirAgua() })
+			}
+		} catch e : DomainException {
+			// En caso de que por alguna razon no se pudo obtener las tuberias disponibles
+			game.say(self, "GAMEOVER") // ROMPER TODO, FIN DEL JUEGO
+		}
 	}
 	
-	/*
-	method llenar(){
-		tieneAgua = true
-	}*/
+	method tuberiasDisponibles() = self.ubicacionPuertos().filter({ direccion => self.puedePasarAgua(direccion) })
+		// Comprobar si para cada puerto, existe una tuberia
+		// Si existe una tuberia adyacente, esta debe estar alineada
+		// Si se cumplen los casos, devolver solo las que puedan pasar agua (que son las que no tienen agua xd)
+		
+	method puedePasarAgua(direccion) = self.obtenerTuberia(direccion).puedeRecibirDesde(direccion.opuesto())
 	
-	method llenarProximaTuberia()
+	method puedeRecibirDesde(direccion) = if (self.existeUnPuertoEn(direccion)) (not tieneAgua) else false
+	
+	method obtenerTuberia(direccion) {
+		var tuberia
+		
+		try { // Mejorar esta parte. getObjetsIn(posicion) obtiene una lista de objetos, por lo que puede que una tuberia no sea el primer objeto de esa lista
+			tuberia = game.getObjectsIn(direccion.proximaPosicion(posicion)).first()
+		} catch e: Exception { // En caso de no se encuentre un objeto, detallamos el error
+			throw new DomainException(message = "No se pudo encontrar una tuberia en esa posicion")
+		}
+		
+		return tuberia
+	}
+	
+	method existeUnPuertoEn(direccion) = self.ubicacionPuertos().contains(direccion)
+	
+	
+		
+	method tipoTuberia()
+	
+	method ubicacionPuertos()
+	
+	method tieneAgua() = tieneAgua
+	
+	method puntoCardinalActual(otraOrientacion) = puntoCardinal == otraOrientacion
+	
+	method siguientePuntoCardinal() {
+		puntoCardinal = puntoCardinal.siguienteOrientacion()
+	}
+	
+	method cambiarPuntoCardinal(nuevoPuntoCardinal) {
+		puntoCardinal = nuevoPuntoCardinal
+	}
 }

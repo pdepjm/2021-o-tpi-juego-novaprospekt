@@ -57,7 +57,11 @@ class Tuberia {
 		}
 	}
 	
-	method tuberiasDisponibles() = self.ubicacionPuertos().filter({ direccion => self.puedePasarAgua(direccion) })
+	method tuberiasDisponibles() {
+		const puertosDisponibles = self.ubicacionPuertos().filter({ direccion => self.puedePasarAgua(direccion) })
+		
+		return puertosDisponibles.map({ puerto => self.obtenerTuberia(puerto) })
+	}
 		// Comprobar si para cada puerto, existe una tuberia
 		// Si existe una tuberia adyacente, esta debe estar alineada
 		// Si se cumplen los casos, devolver solo las que puedan pasar agua (que son las que no tienen agua xd)

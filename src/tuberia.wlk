@@ -58,7 +58,7 @@ class Tuberia {
 	}
 	
 	method tuberiasDisponibles() {
-		const puertosDisponibles = self.ubicacionPuertos().filter({ direccion => self.puedePasarAgua(direccion) })
+		const puertosDisponibles = self.ubicacionPuertos().filter({ puerto => self.puedePasarAgua(puerto) })
 		
 		return puertosDisponibles.map({ puerto => self.obtenerTuberia(puerto) })
 	}
@@ -95,10 +95,11 @@ class Tuberia {
 	method puntoCardinalActual(otraOrientacion) = puntoCardinal == otraOrientacion
 	
 	method siguientePuntoCardinal() {
-		puntoCardinal = puntoCardinal.siguienteOrientacion()
+		puntoCardinal = puntoCardinal.siguiente()
 	}
 	
 	method cambiarPuntoCardinal(nuevoPuntoCardinal) {
 		puntoCardinal = nuevoPuntoCardinal
 	}
 }
+

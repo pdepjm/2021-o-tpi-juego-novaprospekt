@@ -12,7 +12,7 @@ class TuberiaRecta inherits Tuberia {
 	}
 	
 	override method rotar() {
-		if (self.tieneAgua()) {
+		if (not self.tieneAgua()) {
 			if (self.puntoCardinalActual(norte)) {
 				self.siguientePuntoCardinal()
 			} else {

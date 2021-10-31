@@ -3,22 +3,22 @@
 import tuberia.*
 
 object norte {
-	method nombreOrientacion() = "Norte"
+	method nombre() = "Norte"
 	method siguiente() = este
 }
 
 object este{
-	method nombreOrientacion() = "Este"
+	method nombre() = "Este"
 	method siguiente() = sur
 }
 
 object sur {
-	method nombreOrientacion() = "Sur"
+	method nombre() = "Sur"
 	method siguiente() = oeste
 }
 
 object oeste {
-	method nombreOrientacion() = "Oeste"
+	method nombre() = "Oeste"
 	method siguiente() = norte
 }
 

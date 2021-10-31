@@ -1,5 +1,5 @@
 import wollok.game.*
-import nivel1.*
+import nivel.*
 import orientaciones.*
 import direcciones.*
 
@@ -26,9 +26,9 @@ class Tuberia {
 	}
 	
 	// Con este metodo empieza todo el trabajo
-	method recibirAgua() {
+	method recibirAgua(tiempo) {
 		tieneAgua = true
-		game.schedule(nivel1.tiempoLlenado(), { self.pasarAgua() })
+		game.schedule(tiempo, { self.pasarAgua(tiempo) })
 	}
 	
 	// Para que una tuberia pueda pasar agua sin problemas se tiene que cumplir que:
@@ -39,7 +39,7 @@ class Tuberia {
 	//		y muy probablemente estas tuberias son las que llenaron la tuberia original en algun momento
 	//
 	// En caso de no cumplir con las tres condiciones, el juego termina
-	method pasarAgua() {
+	method pasarAgua(tiempo) {
 		// Intentar pasar agua a otras tuberias
 		try {
 			const tuberias = self.tuberiasDisponibles()
@@ -49,7 +49,7 @@ class Tuberia {
 				game.say(self, "GAMEOVER") // ROMPER TODO, FIN DEL JUEGO
 			} else {
 				// En otro caso, las tuberias disponibles deben recibir el agua
-				tuberias.forEach({ tuberia => tuberia.recibirAgua() })
+				tuberias.forEach({ tuberia => tuberia.recibirAgua(tiempo) })
 			}
 		} catch e : DomainException {
 			// En caso de que por alguna razon no se pudo obtener las tuberias disponibles
@@ -83,7 +83,6 @@ class Tuberia {
 	}
 	
 	method existeUnPuertoEn(direccion) = self.ubicacionPuertos().contains(direccion)
-	
 	
 		
 	method tipoTuberia()

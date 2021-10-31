@@ -1,6 +1,6 @@
 import wollok.game.*
 import texto.*
-import nivel1.*
+import managerDeNiveles.*
 
 program juego {
 	//Titulo del juego
@@ -13,10 +13,8 @@ program juego {
 	game.height(10)
 	game.width(10)
 	
-	
-	
-	//Inicializa el Nivel 1
-	nivel1.configuracionInicial()
+	//Inicializa los niveles y carga el Nivel 1 desde el manager de niveles
+	managerDeNiveles.configurarNiveles()
 	
 	//Inicia el juego
 	game.start()

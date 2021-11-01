@@ -4,6 +4,7 @@ import wollok.game.*
 import direcciones.*
 import orientaciones.*
 import texto.*
+import managerDeNiveles.*
 
 class TuberiaInicial inherits Tuberia {
 	
@@ -47,8 +48,7 @@ class TuberiaFinal inherits TuberiaRecta {
 	
 	override method recibirAgua(tiempo) {
 		tieneAgua = true
-		texto.agregarTexto("Partida terminada")
-		game.addVisual(texto)
+		managerDeNiveles.comprobarNivelActual() // Comprueba si el nivel fue completado
 	}
 	
 	override method rotar() {

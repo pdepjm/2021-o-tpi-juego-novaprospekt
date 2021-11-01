@@ -16,6 +16,8 @@ program juego {
 	//Inicializa los niveles y carga el Nivel 1 desde el manager de niveles
 	managerDeNiveles.configurarNiveles()
 	
+	game.boardGround("imagen_fondo.png")
+	
 	//Inicia el juego
 	game.start()
 	

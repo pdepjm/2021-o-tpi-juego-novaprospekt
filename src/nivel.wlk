@@ -4,16 +4,20 @@ import direcciones.*
 
 class Nivel {
 	
-	const segundosEnLlenar = 5
+	const segundosEnLlenar = 0.5
 	var tuberias
+	var entradas
+	var salidas
 	
 	method configuracionInicial(){
 		tuberias.forEach({tuberia => game.addVisual(tuberia)})
+		entradas.forEach({entrada => game.addVisual(entrada)})
+		salidas.forEach({salida => game.addVisual(salida)})
 		
 		//Agrego el cursor de juego
 		game.addVisual(cursor)
 		self.configurarTeclas()
-		self.empezarNivel(tuberias.first())
+		self.empezarNivel()
 	}
 	
 	//Configuro las teclas para moverse y para interactuar
@@ -30,12 +34,22 @@ class Nivel {
 	}
 	
 	//Comienzo el nivel con la tuberia especificada como la primera (la que ya tiene agua)
-	method empezarNivel(primeraTuberia){
-		primeraTuberia.recibirAgua(self.tiempoLlenado())
+	method empezarNivel(){
+		game.schedule(5000, { entradas.forEach({ valvula => valvula.recibirAgua(self.tiempoLlenado())}) })
+	}
+	
+	method removerTuberias() {
+		game.clear()
+		
+		/*tuberias.forEach({tuberia => game.removeVisual(tuberia)})
+		entradas.forEach({entrada => game.removeVisual(entrada)})
+		salidas.forEach({salida => game.removeVisual(salida)})
+		game.removeVisual(cursor)*/
 	}
 	
 	method tiempoLlenado() = segundosEnLlenar * 1000
+	
+	method entradas() = entradas
+
+	method salidasCompletadas() = salidas.all({ salida => salida.tieneAgua() })
 }
-
-
-

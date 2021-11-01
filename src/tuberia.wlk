@@ -2,6 +2,7 @@ import wollok.game.*
 import nivel.*
 import orientaciones.*
 import direcciones.*
+import managerDeNiveles.*
 
 
 // Mensajes principales:
@@ -46,14 +47,14 @@ class Tuberia {
 			
 			// Si no hay ninguna tuberia disponible, fin del juego
 			if (tuberias.isEmpty()) {
-				game.say(self, "GAMEOVER") // ROMPER TODO, FIN DEL JUEGO
+				managerDeNiveles.finalizarNivelActual()
 			} else {
 				// En otro caso, las tuberias disponibles deben recibir el agua
 				tuberias.forEach({ tuberia => tuberia.recibirAgua(tiempo) })
 			}
 		} catch e : DomainException {
 			// En caso de que por alguna razon no se pudo obtener las tuberias disponibles
-			game.say(self, "GAMEOVER") // ROMPER TODO, FIN DEL JUEGO
+			managerDeNiveles.finalizarNivelActual()
 		}
 	}
 	

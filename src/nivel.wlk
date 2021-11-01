@@ -5,6 +5,7 @@ import direcciones.*
 class Nivel {
 	
 	const segundosEnLlenar = 0.5
+	var segundosEnSalir = 30
 	var tuberias
 	var entradas
 	var salidas
@@ -35,7 +36,7 @@ class Nivel {
 	
 	//Comienzo el nivel con la tuberia especificada como la primera (la que ya tiene agua)
 	method empezarNivel(){
-		game.schedule(5000, { entradas.forEach({ valvula => valvula.recibirAgua(self.tiempoLlenado())}) })
+		game.schedule((segundosEnSalir * 1000), { entradas.forEach({ valvula => valvula.recibirAgua(self.tiempoLlenado())}) })
 	}
 	
 	method removerTuberias() {

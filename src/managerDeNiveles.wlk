@@ -14,7 +14,7 @@ object managerDeNiveles {
 	var niveles = []
 	
 	method configurarNiveles() {
-		const nivel1 = new Nivel(tuberias = [
+		const nivel1 = new Nivel(segundosEnSalir = 10,tuberias = [
 			new TuberiaRecta(posicion = game.at(1,2), puntoCardinal = norte),
 			new TuberiaRecta(posicion = game.at(2,2), puntoCardinal = este),
 			new TuberiaCurva(posicion = game.at(3,2), puntoCardinal = sur),
@@ -39,7 +39,7 @@ object managerDeNiveles {
 			new TuberiaFinal(posicion = game.at(9,4), puntoCardinal = este)
 		])
 		
-		const nivel2 = new Nivel(tuberias = [
+		const nivel2 = new Nivel(segundosEnSalir = 10, tuberias = [
 			new TuberiaRecta(posicion = game.at(1,2), puntoCardinal = norte),
 			new TuberiaRecta(posicion = game.at(2,2), puntoCardinal = este),
 			new TuberiaCurva(posicion = game.at(3,2), puntoCardinal = sur),

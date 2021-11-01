@@ -13,9 +13,15 @@ import wollok.game.*
 
 object texto {
 	
-	method position() = game.at(2, 4)
+	var texto = "Partida terminada"
 	
-	method text() = "¡Pepita!"
+	method position() = game.at(5, 0)
+	
+	method text() = texto
+	
+	method agregarTexto(nuevoTexto) {
+		texto = nuevoTexto
+	}
 	
 	method textColor() = paleta.verde()
 	

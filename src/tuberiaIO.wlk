@@ -3,6 +3,7 @@ import tuberiaRecta.*
 import wollok.game.*
 import direcciones.*
 import orientaciones.*
+import texto.*
 
 class TuberiaInicial inherits Tuberia {
 	
@@ -46,7 +47,8 @@ class TuberiaFinal inherits TuberiaRecta {
 	
 	override method recibirAgua(tiempo) {
 		tieneAgua = true
-		game.say(self, "Has ganao") // Ganaste :)
+		texto.agregarTexto("Partida terminada")
+		game.addVisual(texto)
 	}
 	
 	override method rotar() {

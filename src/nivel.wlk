@@ -14,8 +14,6 @@ class Nivel {
 		game.addVisual(cursor)
 		self.configurarTeclas()
 		self.empezarNivel(tuberias.first())
-		
-		
 	}
 	
 	//Configuro las teclas para moverse y para interactuar

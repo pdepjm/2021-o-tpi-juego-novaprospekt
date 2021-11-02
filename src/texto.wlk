@@ -23,11 +23,12 @@ object texto {
 		texto = nuevoTexto
 	}
 	
-	method textColor() = paleta.verde()
+	method textColor() = paleta.blanco()
 	
 }
 
 object paleta {
 	method verde() = "00FF00FF"
 	method rojo() = "FF0000FF"
+	method blanco() = "FFFFFFFF"
 }

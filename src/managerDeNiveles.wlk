@@ -7,6 +7,7 @@ import tuberiaCruz.*
 import wollok.game.*
 import orientaciones.*
 import texto.*
+import cursor.*
 
 object managerDeNiveles {
 	
@@ -14,7 +15,7 @@ object managerDeNiveles {
 	var niveles = []
 	
 	method configurarNiveles() {
-		const nivel1 = new Nivel(segundosEnSalir = 10,tuberias = [
+		const nivel1 = new Nivel(segundosEnSalir = 15,tuberias = [
 			new TuberiaRecta(posicion = game.at(1,2), puntoCardinal = norte),
 			new TuberiaRecta(posicion = game.at(2,2), puntoCardinal = este),
 			new TuberiaCurva(posicion = game.at(3,2), puntoCardinal = sur),
@@ -39,7 +40,7 @@ object managerDeNiveles {
 			new TuberiaFinal(posicion = game.at(9,4), puntoCardinal = este)
 		])
 		
-		const nivel2 = new Nivel(segundosEnSalir = 10, tuberias = [
+		const nivel2 = new Nivel(segundosEnSalir = 8, tuberias = [
 			new TuberiaRecta(posicion = game.at(1,2), puntoCardinal = norte),
 			new TuberiaRecta(posicion = game.at(2,2), puntoCardinal = este),
 			new TuberiaCurva(posicion = game.at(3,2), puntoCardinal = sur),
@@ -87,7 +88,7 @@ object managerDeNiveles {
 		
 		// Si ya no hay mas niveles
 		if (niveles.isEmpty()) {
-			texto.agregarTexto("¡FELICIDADES!") // IMPLEMENTARLO DE MEJOR MANERA
+			texto.agregarTexto("¡Felicidades Has Completado El juego") // IMPLEMENTARLO DE MEJOR MANERA
 			game.addVisual(texto) // IMPLEMENTARLO DE MEJOR MANERA
 			
 			const felicidades = game.sound("felicidades.mp3") // BORRARLO QUE NOS COME EL COPYRIGHT
@@ -99,4 +100,6 @@ object managerDeNiveles {
 			nivelActual.configuracionInicial()
 		}
 	}
+	
+	method segundosParaLlenar() = nivelActual.segundosEnLlenarTuberia()
 }

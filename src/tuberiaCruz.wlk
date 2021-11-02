@@ -10,7 +10,7 @@ class TuberiaCruz inherits Tuberia {
 	
 	override method ubicacionPuertos() = [arriba, abajo, izquierda, derecha]
 	
-	override method rotar() {
+	override method accionar() {
 		// No hacer nada
 	}
 }

@@ -35,8 +35,10 @@ class TuberiaInicial inherits Tuberia {
 		}
 	}
 	
-	override method rotar() {
-		// No hacer nada
+	override method accionar() {
+		if (not self.tieneAgua()) {
+			self.recibirAgua(managerDeNiveles.segundosParaLlenar())
+		}
 	}
 }
 
@@ -51,7 +53,7 @@ class TuberiaFinal inherits TuberiaRecta {
 		managerDeNiveles.comprobarNivelActual() // Comprueba si el nivel fue completado
 	}
 	
-	override method rotar() {
+	override method accionar() {
 		// No hacer nada
 	}
 }

@@ -4,8 +4,8 @@ import direcciones.*
 
 class Nivel {
 	
-	const segundosEnLlenar = 0.5
-	var segundosEnSalir = 30
+	const segundosEnLlenar = 0.2
+	var segundosEnSalir = 30 // Default
 	var tuberias
 	var entradas
 	var salidas
@@ -30,25 +30,20 @@ class Nivel {
 		keyboard.down().onPressDo({ cursor.moverPara(abajo) })
 		
 		//Utiliza un metodo del cursor para interactuar con las tuberias
-		keyboard.space().onPressDo({cursor.rotar()})
+		keyboard.space().onPressDo({cursor.usar()})
 		
 	}
 	
 	//Comienzo el nivel con la tuberia especificada como la primera (la que ya tiene agua)
 	method empezarNivel(){
-		game.schedule((segundosEnSalir * 1000), { entradas.forEach({ valvula => valvula.recibirAgua(self.tiempoLlenado())}) })
+		game.schedule((segundosEnSalir * 1000), { entradas.forEach({ valvula => valvula.accionar()/*recibirAgua(self.tiempoLlenado())*/}) })
 	}
 	
 	method removerTuberias() {
 		game.clear()
-		
-		/*tuberias.forEach({tuberia => game.removeVisual(tuberia)})
-		entradas.forEach({entrada => game.removeVisual(entrada)})
-		salidas.forEach({salida => game.removeVisual(salida)})
-		game.removeVisual(cursor)*/
 	}
 	
-	method tiempoLlenado() = segundosEnLlenar * 1000
+	method segundosEnLlenarTuberia() = segundosEnLlenar * 1000 
 	
 	method entradas() = entradas
 

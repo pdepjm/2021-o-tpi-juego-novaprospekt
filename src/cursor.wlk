@@ -19,12 +19,12 @@ object cursor {
 	}
 	
 	//Este metodo activa el metodo de rotar de la tuberia que se encuentre debajo del cursor
-	method rotar() {
+	method usar() {
 		const tuberia = game.colliders(self)
 		
 		// Si existe una tuberia en la posicion del cursor, lo rota
 		if (not tuberia.isEmpty()) {
-			tuberia.first().rotar()
+			tuberia.first().accionar()
 		}
 	}
 }

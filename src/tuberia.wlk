@@ -20,7 +20,8 @@ class Tuberia {
 	
 	method position() = posicion
 	
-	method rotar() {
+	// ROTAR TUBERIA
+	method accionar() {
 		if (not tieneAgua) {
 			self.siguientePuntoCardinal()
 		}

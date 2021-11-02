@@ -11,16 +11,21 @@ import wollok.game.*
 // Les dejamos algunos ejemplos
 // ¡También se puede combinar con las imágenes!
 
-object texto {
+class Texto {
+	var texto
+	var posicion
 	
-	var texto = "Partida terminada"
-	
-	method position() = game.at(5, 0)
+	method position() = posicion
 	
 	method text() = texto
 	
 	method agregarTexto(nuevoTexto) {
 		texto = nuevoTexto
+	}
+	
+	method mostrar() {
+		game.addVisual(self)
+		game.schedule(3000, { game.removeVisual(self) })
 	}
 	
 	method textColor() = paleta.blanco()

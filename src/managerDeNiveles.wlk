@@ -15,7 +15,7 @@ object managerDeNiveles {
 	var niveles = []
 	
 	method configurarNiveles() {
-		const nivel1 = new Nivel(segundosEnSalir = 15,tuberias = [
+		const nivel1 = new Nivel(segundosEnSalir = 20,tuberias = [
 			new TuberiaRecta(posicion = game.at(1,2), puntoCardinal = norte),
 			new TuberiaRecta(posicion = game.at(2,2), puntoCardinal = este),
 			new TuberiaCurva(posicion = game.at(3,2), puntoCardinal = sur),
@@ -40,7 +40,7 @@ object managerDeNiveles {
 			new TuberiaFinal(posicion = game.at(9,4), puntoCardinal = este)
 		])
 		
-		const nivel2 = new Nivel(segundosEnSalir = 8, tuberias = [
+		const nivel2 = new Nivel(segundosEnSalir = 10, tuberias = [
 			new TuberiaRecta(posicion = game.at(1,2), puntoCardinal = norte),
 			new TuberiaRecta(posicion = game.at(2,2), puntoCardinal = este),
 			new TuberiaCurva(posicion = game.at(3,2), puntoCardinal = sur),
@@ -76,8 +76,8 @@ object managerDeNiveles {
 		if (nivelActual.salidasCompletadas()) {
 			self.siguienteNivel()
 		} else { // REINICIAR NIVEL.
-			texto.agregarTexto("GAME OVER") // IMPLEMENTARLO DE MEJOR MANERA
-			game.addVisual(texto) // IMPLEMENTARLO DE MEJOR MANERA
+			const texto = new Texto(texto = "GAME OVER", posicion = game.at(5,0))
+			texto.mostrar()
 		}
 	}
 	
@@ -88,11 +88,11 @@ object managerDeNiveles {
 		
 		// Si ya no hay mas niveles
 		if (niveles.isEmpty()) {
-			texto.agregarTexto("¡Felicidades Has Completado El juego") // IMPLEMENTARLO DE MEJOR MANERA
-			game.addVisual(texto) // IMPLEMENTARLO DE MEJOR MANERA
+			const texto = new Texto(texto = "¡Felicidades Has Completado El juego", posicion = game.at(5,0)) // IMPLEMENTARLO DE MEJOR MANERA
+			texto.mostrar()
 			
 			const felicidades = game.sound("felicidades.mp3") // BORRARLO QUE NOS COME EL COPYRIGHT
-			felicidades.volume(0.2)
+			felicidades.volume(0.1)
 			felicidades.play()
 			
 		} else {
@@ -102,4 +102,9 @@ object managerDeNiveles {
 	}
 	
 	method segundosParaLlenar() = nivelActual.segundosEnLlenarTuberia()
+	
+	method terminarConteo() {
+		nivelActual.terminarConteo()
+	}
+
 }

@@ -1,6 +1,7 @@
 import wollok.game.*
 import cursor.*
 import direcciones.*
+import temporizador.*
 
 class Nivel {
 	
@@ -9,6 +10,7 @@ class Nivel {
 	var tuberias
 	var entradas
 	var salidas
+	const temporizador = new Temporizador()
 	
 	method configuracionInicial(){
 		tuberias.forEach({tuberia => game.addVisual(tuberia)})
@@ -36,7 +38,13 @@ class Nivel {
 	
 	//Comienzo el nivel con la tuberia especificada como la primera (la que ya tiene agua)
 	method empezarNivel(){
-		game.schedule((segundosEnSalir * 1000), { entradas.forEach({ valvula => valvula.accionar()/*recibirAgua(self.tiempoLlenado())*/}) })
+		temporizador.empezarConteo(segundosEnSalir)
+		game.schedule((segundosEnSalir * 1000), { self.abrirValvulas() })
+	}
+	
+	method abrirValvulas() {
+		entradas.forEach({ valvula => valvula.accionar() })
+		temporizador.terminarConteo()
 	}
 	
 	method removerTuberias() {
@@ -46,6 +54,8 @@ class Nivel {
 	method segundosEnLlenarTuberia() = segundosEnLlenar * 1000 
 	
 	method entradas() = entradas
+	
+	method terminarConteo() = temporizador.terminarConteo()
 
 	method salidasCompletadas() = salidas.all({ salida => salida.tieneAgua() })
 }

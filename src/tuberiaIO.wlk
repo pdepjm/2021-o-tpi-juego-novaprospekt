@@ -38,7 +38,10 @@ class TuberiaInicial inherits Tuberia {
 	override method accionar() {
 		if (not self.tieneAgua()) {
 			self.recibirAgua(managerDeNiveles.segundosParaLlenar())
+			managerDeNiveles.terminarConteo()
 		}
+		
+		
 	}
 }
 

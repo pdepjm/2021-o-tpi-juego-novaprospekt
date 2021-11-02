@@ -1,11 +1,51 @@
 import soundProducer.*
+import managerDeNiveles.*
+import nivel.*
+import tuberia.*
+import tuberiaRecta.*
+import tuberiaCurva.*
+import tuberiaIO.*
+import wollok.game.*
+import direcciones.*
+import orientaciones.*
+import tuberiaT.*
 
-describe "Inserte descripción" {
-	method initialize() {
-		soundProducer.provider(soundProviderMock)		
+describe "Tuberias" {
+	const tuberiaRectaVacia = new TuberiaRecta(posicion = game.at(0,3), puntoCardinal = norte)
+	const tuberiaRectaLlena = new TuberiaRecta(posicion = game.at(0,3), puntoCardinal = norte, tieneAgua = true)
+	const tuberiaCurva = new TuberiaCurva(posicion = game.at(0,3), puntoCardinal = norte)
+	const tuberiaT = new TuberiaT(posicion = game.at(0,3), puntoCardinal = oeste)
+	
+	test "Al llenar una tuberia vacia tiene agua" {
+		tuberiaRectaVacia.recibirAgua(0.2)
+		assert.that(tuberiaRectaVacia.tieneAgua())
+	}	
+	
+	test "No se puede rotar una tuberia llena" {
+		assert.that(tuberiaRectaLlena.puntoCardinal() == norte)
+		tuberiaRectaLlena.accionar()
+		assert.that(tuberiaRectaLlena.puntoCardinal() == norte)
 	}
 	
-	test "testX" {
-		assert.that(true)
-	}	
+	test "Rotar una tuberia curva varias veces la deja orientada correctamente" {
+		assert.that(tuberiaCurva.puntoCardinal() == norte)
+		tuberiaCurva.accionar()
+		assert.that(tuberiaCurva.puntoCardinal() == este)
+		tuberiaCurva.accionar()
+		assert.that(tuberiaCurva.puntoCardinal() == sur)
+		tuberiaCurva.accionar()
+		assert.that(tuberiaCurva.puntoCardinal() == oeste)
+		tuberiaCurva.accionar()
+		assert.that(tuberiaCurva.puntoCardinal() == norte)
+	}
+	
+	test "Una tuberia curva orientada hacia el norte debe tener sus puertos arriba y a la derecha" {
+		assert.that(tuberiaCurva.puntoCardinal() == norte)
+		assert.that(tuberiaCurva.ubicacionPuertos() == [arriba, derecha])
+	}
+	
+	test "Una tuberia en T orientada hacia el oeste debe tener sus puertos abajo, a la izquierda y arriba"{
+		assert.that(tuberiaT.ubicacionPuertos() == [abajo, izquierda, arriba])
+	}
+	
 }

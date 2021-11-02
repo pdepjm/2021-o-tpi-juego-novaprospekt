@@ -102,5 +102,7 @@ class Tuberia {
 	method cambiarPuntoCardinal(nuevoPuntoCardinal) {
 		puntoCardinal = nuevoPuntoCardinal
 	}
+	
+	method puntoCardinal() = puntoCardinal
 }
 

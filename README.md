@@ -15,7 +15,7 @@
 
 ## Reglas de Juego / Instrucciones
 
-(Escribirlas)
+Haz rotar las tuberías utilizando el cursor, colocandolas en la posición correcta para permitir que el agua pase de un lado al otro.
 
 ## Respuestas teóricas
 

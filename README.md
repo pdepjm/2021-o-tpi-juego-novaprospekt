@@ -15,8 +15,8 @@
 
 ## Reglas de Juego / Instrucciones
 
-Gire las tuberias y forme un camino para que el agua tenga una manera de llegar al otro lado
-Hay un tiempo limitado por lo que debe ser rapido
+Haz rotar las tuberías utilizando el cursor, colocandolas en la posición correcta para permitir que el agua pase de un lado al otro.
+Hay un tiempo limitado por lo que debe tener eso en cuenta.
 
 Controles:
 

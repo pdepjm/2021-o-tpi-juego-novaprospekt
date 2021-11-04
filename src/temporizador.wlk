@@ -3,10 +3,11 @@ import wollok.game.*
 
 class Temporizador {
 	var tiempoFuera = false
-	const texto = new Texto(texto = "Tiempo:", posicion = game.at(0, 9))
+	const texto = new Texto(texto = "\nTiempo:", posicion = game.at(0, 9))
 
 	method empezarConteo(tiempo) {
 		pantalla.iniciarDigitos()
+		game.addVisual(texto)
 		self.contabilizar(tiempo)
 	}
 	
@@ -27,12 +28,11 @@ class Temporizador {
 
 
 object pantalla {
+	// Para cambiar la posicion de la pantalla modificar estos datos
+	const x = 2
+	const y = 9
 	
-	const posiUni = game.at(3,9)
-	const posiDec = game.at(2,9)
-	const posiCen = game.at(1,9)
-	
-	const digitosPantalla = [new Digito(digito = "0", posicion = posiCen), new Digito(digito = "0", posicion = posiDec), new Digito(digito = "0", posicion = posiUni)]
+	const digitosPantalla = [new Digito(digito = "0", posicion = game.at(x,y)), new Digito(digito = "0", posicion = game.at(x+1,y)), new Digito(digito = "0", posicion = game.at(x+2,y))]
 	
 	method iniciarDigitos() {
 		digitosPantalla.forEach({ digito => game.addVisual(digito) })

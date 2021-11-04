@@ -15,7 +15,7 @@ object managerDeNiveles {
 	var niveles = []
 	
 	method configurarNiveles() {
-		const nivel1 = new Nivel(segundosEnSalir = 20,tuberias = [
+		const nivel1 = new Nivel(segundosEnSalir = 120,tuberias = [
 			new TuberiaRecta(posicion = game.at(1,2), puntoCardinal = norte),
 			new TuberiaRecta(posicion = game.at(2,2), puntoCardinal = este),
 			new TuberiaCurva(posicion = game.at(3,2), puntoCardinal = sur),
@@ -40,7 +40,7 @@ object managerDeNiveles {
 			new TuberiaFinal(posicion = game.at(9,4), puntoCardinal = este)
 		])
 		
-		const nivel2 = new Nivel(segundosEnSalir = 10, tuberias = [
+		const nivel2 = new Nivel(segundosEnSalir = 20, tuberias = [
 			new TuberiaRecta(posicion = game.at(1,2), puntoCardinal = norte),
 			new TuberiaRecta(posicion = game.at(2,2), puntoCardinal = este),
 			new TuberiaCurva(posicion = game.at(3,2), puntoCardinal = sur),
@@ -62,6 +62,10 @@ object managerDeNiveles {
 		nivelActual = niveles.first() // Obtengo el primero
 		
 		nivelActual.configuracionInicial() // Lo inicio
+		
+		const sonidoFondo = game.sound("background.mp3")
+		sonidoFondo.volume(0.25)
+		game.schedule(500, { sonidoFondo.play() })
 	}
 	
 	// Comprueba si el nivel fue completado
@@ -75,7 +79,7 @@ object managerDeNiveles {
 	method finalizarNivelActual() {
 		if (nivelActual.salidasCompletadas()) {
 			self.siguienteNivel()
-		} else { // REINICIAR NIVEL.
+		} else { // FINALIZAR JUEGO
 			const texto = new Texto(texto = "GAME OVER", posicion = game.at(5,0))
 			texto.mostrar()
 		}
@@ -88,12 +92,12 @@ object managerDeNiveles {
 		
 		// Si ya no hay mas niveles
 		if (niveles.isEmpty()) {
-			const texto = new Texto(texto = "¡Felicidades Has Completado El juego", posicion = game.at(5,0)) // IMPLEMENTARLO DE MEJOR MANERA
+			const texto = new Texto(texto = "¡Felicidades!\nHas completado el juego", posicion = game.at(5,0)) // IMPLEMENTARLO DE UNA MEJOR MANERA
 			texto.mostrar()
 			
-			const felicidades = game.sound("felicidades.mp3") // BORRARLO QUE NOS COME EL COPYRIGHT
-			felicidades.volume(0.1)
-			felicidades.play()
+			//const felicidades = game.sound("felicidades.mp3") // BORRARLO QUE NOS COME EL COPYRIGHT
+			//felicidades.volume(0.1)
+			//felicidades.play()
 			
 		} else {
 			nivelActual = niveles.first()

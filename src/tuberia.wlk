@@ -6,8 +6,8 @@ import managerDeNiveles.*
 
 
 // Mensajes principales:
-// Tuberia.rotar()
-// Tuberia.recibirAgua()
+// Tuberia.accionar()
+// Tuberia.recibirAgua(tiempo)
 
 class Tuberia {
 	const posicion

@@ -13,14 +13,17 @@ class Nivel {
 	const temporizador = new Temporizador()
 	
 	method configuracionInicial(){
+		self.agregarObjetos()
+		self.configurarTeclas()
+		self.empezarNivel()
+	}
+	
+	method agregarObjetos() {
 		tuberias.forEach({tuberia => game.addVisual(tuberia)})
 		entradas.forEach({entrada => game.addVisual(entrada)})
 		salidas.forEach({salida => game.addVisual(salida)})
 		
-		//Agrego el cursor de juego
 		game.addVisual(cursor)
-		self.configurarTeclas()
-		self.empezarNivel()
 	}
 	
 	//Configuro las teclas para moverse y para interactuar

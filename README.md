@@ -15,7 +15,13 @@
 
 ## Reglas de Juego / Instrucciones
 
-(Escribirlas)
+Gire las tuberias y forme un camino para que el agua tenga una manera de llegar al otro lado
+Hay un tiempo limitado por lo que debe ser rapido
+
+Controles:
+
+FLECHAS - Movimiento
+ESPACIO - Girar/Abrir
 
 ## Respuestas teóricas
 

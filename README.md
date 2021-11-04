@@ -17,6 +17,11 @@
 
 Haz rotar las tuberías utilizando el cursor, colocandolas en la posición correcta para permitir que el agua pase de un lado al otro.
 
+Controles:
+
+FLECHAS - Movimiento
+ESPACIO - Girar/Abrir
+
 ## Respuestas teóricas
 
 (link al archivo o bien responder acá)

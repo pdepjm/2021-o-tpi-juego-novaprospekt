@@ -44,6 +44,8 @@ class Tuberia {
 	method pasarAgua(tiempo) {
 		// Intentar pasar agua a otras tuberias
 		try {
+			self.verificarPuertosConectados()
+			
 			const tuberias = self.tuberiasDisponibles()
 			
 			// Si no hay ninguna tuberia disponible, fin del juego
@@ -73,20 +75,27 @@ class Tuberia {
 	method puedeRecibirDesde(direccion) = if (self.existeUnPuertoEn(direccion)) (not tieneAgua) else false
 	
 	method obtenerTuberia(direccion) {
-		var tuberia
+		var tuberia = game.getObjectsIn(direccion.proximaPosicion(posicion))
 		
-		try { // Mejorar esta parte. getObjetsIn(posicion) obtiene una lista de objetos, por lo que puede que una tuberia no sea el primer objeto de esa lista
-			tuberia = game.getObjectsIn(direccion.proximaPosicion(posicion)).first()
-		} catch e: Exception { // En caso de no se encuentre un objeto, detallamos el error
+		if (tuberia.isEmpty()) {
 			throw new DomainException(message = "No se pudo encontrar una tuberia en esa posicion")
 		}
 		
-		return tuberia
+		return tuberia.first()
 	}
 	
 	method existeUnPuertoEn(direccion) = self.ubicacionPuertos().contains(direccion)
 	
-		
+	method verificarPuertosConectados() {
+		if (self.algunPuertoNoEstaConectado()) {
+			throw new DomainException(message = "Un puerto no esta conectado. ¡Fuga inminente!")
+		}
+	}
+	
+	method algunPuertoNoEstaConectado() = self.ubicacionPuertos().any({ puerto => not self.estaConectado(puerto) })
+	
+	method estaConectado(puerto) = self.obtenerTuberia(puerto).existeUnPuertoEn(puerto.opuesto())
+	
 	method tipoTuberia()
 	
 	method ubicacionPuertos()

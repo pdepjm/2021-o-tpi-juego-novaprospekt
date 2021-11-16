@@ -3,6 +3,18 @@ import cursor.*
 import direcciones.*
 import temporizador.*
 
+// Mensaje principal
+// Nivel.configuracionInicial()
+
+// Mensajes secundarios
+// Nivel.agregarObjetos()
+// Nivel.configurarTeclas()
+// Nivel.empezarNivel()
+// Nivel.abrirValvulas()
+// Nivel.removerTuberias()
+// Nivel.terminarConteo()
+// Nivel.salidasCompletadas()
+
 class Nivel {
 	
 	const segundosEnLlenar = 0.2

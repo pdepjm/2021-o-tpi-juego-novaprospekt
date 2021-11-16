@@ -1,25 +1,42 @@
 // Sentido de giro horario
 
-import tuberia.*
+import direcciones.*
 
 object norte {
 	method nombre() = "Norte"
 	method siguiente() = este
+	
+	method direccionAsociada() = arriba
+	method direccionHorario() = derecha
+	method direccionAntiHorario() = izquierda
+	
 }
 
 object este{
 	method nombre() = "Este"
 	method siguiente() = sur
+	
+	method direccionAsociada() = derecha
+	method direccionHorario() = abajo
+	method direccionAntiHorario() = arriba
 }
 
 object sur {
 	method nombre() = "Sur"
 	method siguiente() = oeste
+	
+	method direccionAsociada() = abajo
+	method direccionHorario() = izquierda
+	method direccionAntiHorario() = derecha
 }
 
 object oeste {
 	method nombre() = "Oeste"
 	method siguiente() = norte
+	
+	method direccionAsociada() = izquierda
+	method direccionHorario() = arriba
+	method direccionAntiHorario() = abajo
 }
 
 

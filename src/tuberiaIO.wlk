@@ -22,18 +22,7 @@ class TuberiaInicial inherits Tuberia {
 		}
 	}
 	
-	override method ubicacionPuertos() {
-		// Secuencia de if :(
-		if (self.puntoCardinalActual(norte)) {
-			return [arriba]
-		} else if (self.puntoCardinalActual(este)) {
-			return [derecha]
-		} else if (self.puntoCardinalActual(sur)) {
-			return [abajo]
-		} else {
-			return [izquierda]
-		}
-	}
+	override method ubicacionPuertos() = [puntoCardinal.direccionAsociada()]
 	
 	override method accionar() {
 		if (not self.tieneAgua()) {

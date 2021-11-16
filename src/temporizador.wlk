@@ -1,6 +1,7 @@
 import texto.*
 import wollok.game.*
 
+//
 class Temporizador {
 	var tiempoFuera = false
 	const texto = new Texto(texto = "\nTiempo:", posicion = game.at(0, 9))

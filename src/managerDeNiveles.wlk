@@ -9,6 +9,12 @@ import orientaciones.*
 import texto.*
 import cursor.*
 
+// managerDeNiveles.configurarNiveles()
+// managerDeNiveles.comprobarNivelActual()
+// managerDeNiveles.finalizarNivelActual()
+// managerDeNiveles.siguienteNivel()
+// managerDeNiveles.terminarConteo()
+
 object managerDeNiveles {
 	
 	var nivelActual

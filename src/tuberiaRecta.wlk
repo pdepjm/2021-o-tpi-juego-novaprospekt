@@ -7,9 +7,7 @@ class TuberiaRecta inherits Tuberia {
 	
 	override method tipoTuberia() = "Recta"
 	
-	override method ubicacionPuertos() {
-		if (self.puntoCardinalActual(norte)) return [arriba, abajo] else return [izquierda, derecha]
-	}
+	override method ubicacionPuertos() = [puntoCardinal.direccionAsociada(), puntoCardinal.direccionAsociada().opuesto()]
 	
 	override method accionar() {
 		if (not self.tieneAgua()) {

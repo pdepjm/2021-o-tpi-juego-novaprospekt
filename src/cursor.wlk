@@ -1,6 +1,9 @@
 import direcciones.*
 import wollok.game.*
 
+// cursor.moverPara(direccion)
+// cursor.usar()
+
 object cursor {
 	//Arranca en el centro
 	var posicion = game.center()

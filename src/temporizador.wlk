@@ -4,7 +4,7 @@ import wollok.game.*
 //
 class Temporizador {
 	var tiempoFuera = false
-	const texto = new Texto(texto = "\nTiempo:", posicion = game.at(0, 9))
+	const texto = new Texto(texto = "\nTIEMPO:", posicion = game.at(1, 14))
 
 	method empezarConteo(tiempo) {
 		pantalla.iniciarDigitos()
@@ -30,8 +30,8 @@ class Temporizador {
 
 object pantalla {
 	// Para cambiar la posicion de la pantalla modificar estos datos
-	const x = 2
-	const y = 9
+	const x = 3
+	const y = 14
 	
 	const digitosPantalla = [new Digito(digito = "0", posicion = game.at(x,y)), new Digito(digito = "0", posicion = game.at(x+1,y)), new Digito(digito = "0", posicion = game.at(x+2,y))]
 	

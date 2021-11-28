@@ -4,8 +4,7 @@ import wollok.game.*
 // cursor.moverPara(direccion)
 // cursor.usar()
 
-object cursor {
-	//Arranca en el centro
+class Cursor {
 	var posicion = game.center()
 
 	method image() = "cursor.png"
@@ -16,18 +15,15 @@ object cursor {
 		posicion = unaPosicion
 	}
 	
-	//Mueve el cursor hacia una de las 4 direcciones, es utilizado por keyboard
 	method moverPara(direccion) {
 		posicion = direccion.proximaPosicion(posicion) 
 	}
 	
-	//Este metodo activa el metodo de rotar de la tuberia que se encuentre debajo del cursor
 	method usar() {
-		const tuberia = game.colliders(self)
+		const tuberias = game.colliders(self)
 		
-		// Si existe una tuberia en la posicion del cursor, lo rota
-		if (not tuberia.isEmpty()) {
-			tuberia.first().accionar()
+		if (not tuberias.isEmpty()) {
+			tuberias.first().accionar()
 		}
 	}
 }

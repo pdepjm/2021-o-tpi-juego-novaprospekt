@@ -37,7 +37,7 @@ class TuberiaInicial inherits Tuberia {
 class TuberiaFinal inherits TuberiaRecta {
 	
 	override method image() {
-		return "tuberiaFinal" + puntoCardinal.nombre() + ".png"
+		return "tuberiaFinal" + self.puntoCardinal().nombre() + ".png"
 	}
 	
 	override method recibirAgua(tiempo) {

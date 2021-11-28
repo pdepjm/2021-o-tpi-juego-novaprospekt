@@ -6,6 +6,19 @@ import wollok.game.*
 // Si sus tests fallan porque les dice que no pueden iniciar sonidos antes de que empiece el juego
 // lo que deben hacer es cambiar el proveedor del soundProducer, asi: soundProducer.provider(soundProviderMock)
 
+object managerDeSonido {
+	const sonidoFondo = game.sound("background.mp3")
+	
+	method reproducirMusica() {
+		sonidoFondo.volume(0.25)
+		sonidoFondo.play()
+	}
+	
+	method pararMusica() {
+		sonidoFondo.pause()
+	}
+}
+
 object soundProducer {
 	
 	var provider = game

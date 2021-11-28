@@ -11,6 +11,20 @@ import wollok.game.*
 // Les dejamos algunos ejemplos
 // ¡También se puede combinar con las imágenes!
 
+object monitor {
+	const posiMonitorX = 5
+	const posiMonitorY = 0
+	const monitor = new Texto(posicion = game.at(posiMonitorX, posiMonitorY), texto = "")
+	
+	method inicializar() {
+		game.addVisual(monitor)
+	}
+	
+	method imprimir(texto) {
+		monitor.agregarTexto(texto)
+	}
+}
+
 class Texto {
 	var texto
 	var posicion
@@ -23,13 +37,7 @@ class Texto {
 		texto = nuevoTexto
 	}
 	
-	method mostrar() {
-		game.addVisual(self)
-		game.schedule(3000, { game.removeVisual(self) })
-	}
-	
 	method textColor() = paleta.blanco()
-	
 }
 
 object paleta {

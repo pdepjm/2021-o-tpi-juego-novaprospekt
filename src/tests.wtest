@@ -41,11 +41,14 @@ describe "Tuberias" {
 	
 	test "Una tuberia curva orientada hacia el norte debe tener sus puertos arriba y a la derecha" {
 		assert.that(tuberiaCurva.puntoCardinal() == norte)
-		assert.that(tuberiaCurva.ubicacionPuertos() == [arriba, derecha])
+		assert.that(tuberiaCurva.ubicacionPuertos().contains(arriba))
+		assert.that(tuberiaCurva.ubicacionPuertos().contains(derecha))
 	}
 	
 	test "Una tuberia en T orientada hacia el oeste debe tener sus puertos abajo, a la izquierda y arriba"{
-		assert.that(tuberiaT.ubicacionPuertos() == [abajo, izquierda, arriba])
+		assert.that(tuberiaT.ubicacionPuertos().contains(arriba))
+		assert.that(tuberiaT.ubicacionPuertos().contains(abajo))
+		assert.that(tuberiaT.ubicacionPuertos().contains(izquierda))
 	}
 	
 }

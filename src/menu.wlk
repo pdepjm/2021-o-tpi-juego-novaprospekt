@@ -64,7 +64,7 @@ object empezarPartida {
 	
 	method elegir() {
 		game.clear()
-		partidaPrincipal.iniciar()
+		partidaPrincipal.inicializar()
 	}
 }
 

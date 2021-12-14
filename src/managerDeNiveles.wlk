@@ -12,6 +12,7 @@ import soundProducer.*
 import menu.*
 import direcciones.*
 import interfaz.*
+import temporizador.*
 
 // managerDeNiveles.configurarNiveles()
 // managerDeNiveles.comprobarNivelActual()
@@ -20,8 +21,33 @@ import interfaz.*
 // managerDeNiveles.terminarConteo()
 
 object partidaPrincipal {
-	method iniciar() {
+	const temporizador = new Temporizador()
+	
+	method inicializar() {
+		self.prepararInterfaz()
+		self.configurarTeclas()
+		temporizador.inicializar()
 		managerDeNiveles.prepararNiveles(self.obtenerNiveles())
+	}
+	
+	method prepararInterfaz() {
+		game.addVisual(barraSuperior)
+		game.addVisual(baseMonitoreo)
+		game.addVisual(luzRoja)
+		game.addVisual(luzVerde)
+		game.addVisual(pj)
+		
+		monitor.inicializar()
+	}
+	
+	method configurarTeclas() {
+		keyboard.backspace().onPressDo({ self.mostrarMenuPrincipal() })
+	}
+	
+	method mostrarMenuPrincipal() {
+		monitor.imprimir("", "")
+		game.clear()
+		menu.mostrar()
 	}
 	
 	method obtenerNiveles() {
@@ -72,31 +98,51 @@ object partidaPrincipal {
 		 
 		return [nivel1, nivel2]
 	}
+	
+	method terminarPartida(nivelesCompletados) {
+		var texto
+		var texto2
+		
+		if (nivelesCompletados) {
+			texto = "BIEN HECHO - PUNTOS: 5"
+			texto2 = "ENTER: Volver al menu"
+		} else {
+			texto = "GAME OVER - PUNTOS: 0"
+			texto2 = "ENTER: Volver al menu"
+		}
+		
+		monitor.imprimir(texto, texto2)
+		keyboard.enter().onPressDo({ self.mostrarMenuPrincipal() })
+	}
+	
+	method empezarConteo(tiempo) {
+		temporizador.empezarConteo(tiempo)
+	}
+	
+	method terminarConteo() {
+		temporizador.terminarConteo()
+	}
+	
+	method reiniciarConteo() {
+		temporizador.reiniciar()
+	}
 }
 
 object managerDeNiveles {
 	var niveles
 	var nivelActual
-	var partidaGanada
+	var estanCompletados
 	
 	method prepararNiveles(nuevosNiveles) {
-		self.prepararInterfaz()
-		self.configurarTeclas()
-		
-		partidaGanada = false
+		estanCompletados = false
 		niveles = nuevosNiveles
-		nivelActual = niveles.first()
-		nivelActual.configuracionInicial()
+		self.iniciarNivel()
 	}
 	
-	method prepararInterfaz() {
-		game.addVisual(barraSuperior)
-		game.addVisual(baseMonitoreo)
-		game.addVisual(luzRoja)
-		game.addVisual(luzVerde)
-		game.addVisual(pj)
-		
-		monitor.inicializar()
+	method iniciarNivel() {
+		partidaPrincipal.reiniciarConteo()
+		nivelActual = niveles.first()
+		nivelActual.configuracionInicial()
 	}
 	
 	method comprobarNivelActual() {
@@ -109,8 +155,8 @@ object managerDeNiveles {
 		if (nivelActual.salidasCompletadas()) {
 			self.siguienteNivel()
 		} else {
-			partidaGanada = false
-			self.terminarPartida()
+			estanCompletados = false
+			partidaPrincipal.terminarPartida(estanCompletados)
 		}
 	}
 	
@@ -118,36 +164,22 @@ object managerDeNiveles {
 		niveles.remove(nivelActual)
 		
 		if (niveles.isEmpty()) {
-			partidaGanada = true
-			self.terminarPartida()
+			estanCompletados = true
+			partidaPrincipal.terminarPartida(estanCompletados)
 		} else {
 			nivelActual.removerTuberias()
-			nivelActual = niveles.first()
-			nivelActual.configuracionInicial()
+			self.iniciarNivel()
 		}
-	}
-	
-	method terminarPartida() {
-		var texto
-		if (partidaGanada) texto = "ENHORABUENA \nENTER: Volver al menu" else texto = "GAME OVER\nENTER: Volver al menu" 
-		
-		monitor.imprimir(texto)
-		keyboard.enter().onPressDo({ self.mostrarMenuPrincipal() })
 	}
 	
 	method segundosParaLlenar() = nivelActual.segundosEnLlenarTuberia()
 	
 	method terminarConteo() {
-		nivelActual.terminarConteo()
+		partidaPrincipal.terminarConteo()
+		nivelActual.removerCursor()
 	}
 	
-	method configurarTeclas() {
-		keyboard.backspace().onPressDo({ self.mostrarMenuPrincipal() })
-	}
-	
-	method mostrarMenuPrincipal() {
-		monitor.imprimir("")
-		game.clear()
-		menu.mostrar()
+	method empezarConteo(tiempo) {
+		partidaPrincipal.empezarConteo(tiempo)
 	}
 }

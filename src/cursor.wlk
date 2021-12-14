@@ -6,6 +6,7 @@ import wollok.game.*
 
 class Cursor {
 	var posicion = game.center()
+	var desactivado = false
 
 	method image() = "cursor.png"
 	
@@ -16,14 +17,29 @@ class Cursor {
 	}
 	
 	method moverPara(direccion) {
-		posicion = direccion.proximaPosicion(posicion) 
+		if (not desactivado)
+			posicion = direccion.proximaPosicion(posicion) 
 	}
 	
 	method usar() {
-		const tuberias = game.colliders(self)
+		if (not desactivado) {
+			const tuberias = game.colliders(self)
 		
-		if (not tuberias.isEmpty()) {
-			tuberias.first().accionar()
+			if (not tuberias.isEmpty()) {
+				tuberias.first().accionar()
+			}
+		}
+	}
+	
+	method mostrarse() {
+		desactivado = false
+		game.addVisual(self)
+	}
+	
+	method eliminarse() {
+		if (not desactivado) {
+			desactivado = true
+			game.removeVisual(self)
 		}
 	}
 }

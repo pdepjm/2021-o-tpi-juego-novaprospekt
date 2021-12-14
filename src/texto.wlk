@@ -12,16 +12,20 @@ import wollok.game.*
 // ¡También se puede combinar con las imágenes!
 
 object monitor {
-	const posiMonitorX = 5
+	const posiMonitorX = 4
 	const posiMonitorY = 0
 	const monitor = new Texto(posicion = game.at(posiMonitorX, posiMonitorY), texto = "")
+	const monitor2 = new Texto(posicion = game.at(posiMonitorX, posiMonitorY), texto = "")
 	
 	method inicializar() {
 		game.addVisual(monitor)
+		game.addVisual(monitor2)
 	}
 	
-	method imprimir(texto) {
+	method imprimir(texto, otroTexto) {
+		const texto2 = "\n" + otroTexto
 		monitor.agregarTexto(texto)
+		monitor2.agregarTexto(texto2)
 	}
 }
 

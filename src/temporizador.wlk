@@ -5,10 +5,18 @@ import wollok.game.*
 class Temporizador {
 	var tiempoFuera = false
 	const texto = new Texto(texto = "\nTIEMPO:", posicion = game.at(1, 14))
-
-	method empezarConteo(tiempo) {
+	
+	method inicializar() {
 		pantalla.iniciarDigitos()
 		game.addVisual(texto)
+	}
+	
+	method reiniciar() {
+		tiempoFuera = false
+		pantalla.reiniciar()
+	}
+	
+	method empezarConteo(tiempo) {
 		self.contabilizar(tiempo)
 	}
 	
@@ -41,6 +49,10 @@ object pantalla {
 	
 	method tiempoFuera() {
 		self.mostrarDigitos(["0", "u", "t"])
+	}
+	
+	method reiniciar() {
+		self.mostrarDigitos(["0", "0", "0"])
 	}
 	
 	method mostrarDigitos(nuevosDigitos) {

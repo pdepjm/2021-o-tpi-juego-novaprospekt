@@ -5,6 +5,7 @@ import temporizador.*
 import menu.*
 import soundProducer.*
 import texto.*
+import managerDeNiveles.*
 
 // Mensaje principal
 // Nivel.configuracionInicial()
@@ -24,7 +25,6 @@ class Nivel {
 	var tuberias
 	var entradas
 	var salidas
-	const temporizador = new Temporizador()
 	const cursor = new Cursor()
 	
 	method configuracionInicial(){
@@ -37,17 +37,22 @@ class Nivel {
 		tuberias.forEach({tuberia => game.addVisual(tuberia)})
 		entradas.forEach({entrada => game.addVisual(entrada)})
 		salidas.forEach({salida => game.addVisual(salida)})
-		game.addVisual(cursor)
+		
+		cursor.mostrarse()
 	}
 	
 	method empezarNivel(){
-		temporizador.empezarConteo(conteo)
+		managerDeNiveles.empezarConteo(conteo)
 		game.schedule((conteo * 1000), { self.abrirValvulas() })
 	}
 	
 	method abrirValvulas() {
 		entradas.forEach({ valvula => valvula.accionar() })
-		temporizador.terminarConteo()
+		managerDeNiveles.terminarConteo()
+	}
+	
+	method removerCursor() {
+		cursor.eliminarse()
 	}
 	
 	method removerTuberias() {
@@ -67,8 +72,6 @@ class Nivel {
 	method segundosEnLlenarTuberia() = segundosEnLlenar * 1000 
 	
 	method entradas() = entradas
-	
-	method terminarConteo() = temporizador.terminarConteo()
 
 	method salidasCompletadas() = salidas.all({ salida => salida.tieneAgua() })
 }

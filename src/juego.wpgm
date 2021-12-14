@@ -1,10 +1,20 @@
 import wollok.game.*
-import pepita.*
 import texto.*
+import managerDeNiveles.*
+import menu.*
 
 program juego {
-	game.title("Juego Base")
-	game.addVisual(pepita)
-	game.addVisual(texto)
+	game.title("Plumber")
+	
+	game.cellSize(32)
+	
+	game.height(15)
+	game.width(12)
+	
+	menu.mostrar()
+	
+	game.boardGround("imagen_fondo.png")
+	
 	game.start()
+	
 }
